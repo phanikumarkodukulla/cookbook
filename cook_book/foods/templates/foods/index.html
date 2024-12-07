@@ -1,0 +1,589 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cook-Book</title>
+     <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href=  
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: black;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85); /* Glass-like background color */
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: black; /* White text color for links */
+        }
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #ffffff; /* White text color on hover */
+        }
+        .navbar-light .navbar-toggler {
+            border-color: #ffffff; /* White border color for toggler */
+        }
+        .navbar-light .navbar-toggler-icon {
+            color: black;
+        }
+        .animated-text {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            animation: marquee 10s linear infinite;
+        }
+        .animated-text span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 10s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        footers {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            background:auto;
+            padding: 5px auto;
+        }
+        .footers-icons a {
+            margin: 0 10px;
+            color: blue;
+        }
+        .body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(300,300,300,0.1);
+        }
+        .outer-container {
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            border: none;
+            background-image: url('{% static "images/bg1.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .inner-container {
+            display: flex;
+            width: calc(100% * 7);
+            background-color: none;
+            animation: scroll 14s linear infinite;
+            color: white;
+        }
+        .item {
+            flex: 50px;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .item img {
+            height: 200px;
+            width: 200px;
+        }
+        .each {
+            border-style: solid;
+            border-color: white;
+            border-width: 3px;
+            border-radius: 20px;
+            height: auto;
+            width: auto;
+        }
+        h5 {
+            font-size: 30px;
+            color: white;
+            border-radius: 20px;
+        }
+        .navLogo {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+        .logoStart {
+            height: 170px;
+            width: 170px;
+            border-radius: 50%;
+        }
+        .container{
+            background-image:url("{% static 'images/ultrabg.jpg' %}");
+            background-size:100% 100%;
+
+        }
+        .overlay {
+          position:fixed;
+          width: 100%;
+          height: 100%;
+          background-image:url("https://i.ibb.co/fSRbJDk/bggg.png");
+            background-size:100% 100%;
+            background-repeat:no-repeat;
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          animation: fadeIn 1s ease-out forwards;
+        }
+
+        .logoed {
+          width: 200px;
+          height: 200px;
+          background-color: white;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: moveUp 1s ease-out forwards;
+        }
+
+        @keyframes moveUp {
+          from {
+            transform: translateY(100vh);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+        }
+
+        .content {
+          display:none;
+        }
+    </style>
+    <style>
+
+        #map {
+            height: 500px;
+            width: 100%;
+            opacity: 0.5;
+            transition: opacity 0.5s;
+        }
+        #notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-containerzz {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .btn-find {
+            background-color: #ff0000;
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .btn-find-circular {
+            background-color: #ff0000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .btn-find-circular i {
+            font-size: 1.5rem;
+        }
+        .btn-reappear {
+            background-color: #ff0000;
+            color: white;
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .splitLogo{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="logoed"><img src="{% static 'images/logo.jpg' %}" class="splitLogo"></div>
+        <div class="close-btn" style = "background-color:red;border-radius:50%; height:40px;width:40px;justify-content:center;display:flex;">&times;</div>
+        </br><h1 style= "color:white;font-family:saint-serif;" align = "center">Welcome to Cook - Book</h1>
+      </div>
+
+     
+       
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script>
+        $(document).ready(function() {
+            
+          $('.close-btn').click(function() {
+            $('.overlay').fadeOut('slow', function() {
+               
+              $('.content').fadeIn('slow');
+            });
+          });
+        });
+      </script>
+          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="content">
+          <nav class="navbar navbar-expand-lg navbar-light">
+              <a class="navbar-brand" href="#">
+                  <img src="{% static 'images/logo.jpg' %}" class="navLogo" alt="Logo">&nbsp; Cook - Book
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'add_recipe' %}"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Recipe</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'food_store' %}"><i class="fas fa-store"></i>&nbsp;&nbsp;&nbsp;Food Store</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp;About Us</a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+     
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center"></br>
+                <img src="{% static 'images/logo.jpg' %}" class="logoStart"></br>
+                <h3 class="head" style="color:white; font-family:serif; font-size:30px;" align="center">
+                    <span>Welcome to</br></h3>
+                <h1 align="center" style="color:white; font-family:serif;">Cook-Book</h1></span>
+                <p class="animated-text" style="color:white;">Discover and share your favorite recipes.</p></br>
+                <a href="{% url 'explore' %}" class="btn btn-info"><i class="fas fa-utensils"></i> Explore Food</a></br></br>
+            </div>
+        </div>
+    </div>
+    </br></br></br>
+    <div class="body">
+        <div class="outer-container">
+            <div class="inner-container">
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/coffee.jpg' %}" alt="Image 1" class="img"></div>
+                    <h5>Coffee</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/tea.jpg' %}" alt="Image 2" class="img"></div>
+                    <h5>Tea</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/fruitSalad.jpg' %}" alt="Image 3"></div>
+                    <h5>Fruit Salad</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/vegSalad.jpg' %}" alt="Image 4"></div>
+                    <h5>Vegetable Salad</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/rice.jpg' %}" alt="Image 5"></div>
+                    <h5>Rice</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/curry.jpg' %}" alt="Image 6"></div>
+                    <h5>Curry</h5>
+                </div>
+                <div class="item"><div class="each">
+                    <img src="{% static 'images/manchooria.jpg' %}" alt="Image 7"></div>
+                    <h5>Snacks</h5>
+                </div>
+            </div>
+        </div>
+    </div></br>
+    <hr style="background-color:white;">
+    <h2 align="center" style="color:white;font-style:serif;">World of food.</h2>
+    <hr style="background-color:white;">
+    <img src="{% static 'images/worldmap.jpg' %}" style="width:100%;height:auto;" /></br>
+    <hr style="background-color:white;"></br>
+</br>
+
+       <div id="notification">Searching for hotels and restaurants</div>
+        <div class="containerzz mt-5">
+            <h1 class="text-center mb-5" style= "color:white;font-style:cursive;">Find Hotels and Restaurants</h1>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="form-containerzz">
+                        <form id="place-form">
+                            <div class="form-group">
+                                <label for="place-input">
+                                    <i class="fa fa-map-marker" style="font-size:22px;color:red"></i>&nbsp;Enter a location:</label>
+                                <input type="text" id="place-input" class="form-control" placeholder="Enter location">
+                            </div>
+                            <button type="submit" class="btn btn-find btn-block" id="find-btn">Find</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="map" class="mt-5">
+                <iframe
+                    id="map-iframe"
+                    width="100%"
+                    height="500px"
+                    frameborder="0"
+                    style="border:0"
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0"
+                    src="https://www.google.com/maps?q=hotels+restaurants+near+Vizag&output=embed">
+                </iframe>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#map').hide(); // Initially hide the map
+
+                $('#place-form').submit(function(event) {
+                    event.preventDefault();
+                    let placeName = $('#place-input').val().trim();
+                    if (placeName) {
+                        placeName = placeName.charAt(0).toUpperCase() + placeName.slice(1);
+                        animateButton();
+                        showNotification();
+                        setTimeout(function() {
+                            updateMap(placeName);
+                            $('#map').css('opacity', 1).slideDown();
+                            $('#find-btn').hide();
+                        }, 3000);
+                    }
+                });
+
+                $('#place-input').focus(function() {
+                    $('#find-btn').removeClass('btn-find-circular').addClass('btn-reappear').html('Find').show();
+                    $('#map').slideUp();
+                });
+
+                function animateButton() {
+                    const findBtn = $('#find-btn');
+                    findBtn.html('<i class="fas fa-search"></i>');
+                    findBtn.removeClass('btn-find').addClass('btn-find-circular');
+                }
+
+                function showNotification() {
+                    const notification = $('#notification');
+                    notification.show();
+                    setTimeout(function() {
+                        notification.hide();
+                    }, 3000);
+                }
+
+                function updateMap(placeName) {
+                    const mapIframe = $('#map-iframe');
+                    const mapUrl = `https://www.google.com/maps?q=hotels+restaurants+near+${encodeURIComponent(placeName)}&output=embed`;
+
+                    mapIframe.attr('src', mapUrl);
+                }
+            });
+        </script>
+
+    <div class="quote mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-utensils mr-2"></i> "Food is not just eating energy. It's an experience."</p>
+                            <footer class="blockquote-footer">Guy Fieri</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-seedling mr-2"></i> "Let food be thy medicine and medicine be thy food."</p>
+                            <footer class="blockquote-footer">Hippocrates</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-heart mr-2"></i> "The food you eat can be either the safest and most powerful form of medicine or the slowest form of poison."</p>
+                            <footer class="blockquote-footer">Ann Wigmore</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-apple-alt mr-2"></i> "Eat breakfast like a king, lunch like a prince, and dinner like a pauper."</p>
+                            <footer class="blockquote-footer">Adelle Davis</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-leaf mr-2"></i> "The food you eat can either be the safest and most powerful form of medicine or the slowest form of poison."</p>
+                            <footer class="blockquote-footer">Ann Wigmore</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-coffee mr-2"></i> "People who love to eat are always the best people."</p>
+                            <footer class="blockquote-footer">Julia Child</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-pepper-hot mr-2"></i> "Food is our common ground, a universal experience."</p>
+                            <footer class="blockquote-footer">James Beard</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-carrot mr-2"></i> "One cannot think well, love well, sleep well, if one has not dined well."</p>
+                            <footer class="blockquote-footer">Virginia Woolf</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-ice-cream mr-2"></i> "The only thing I like better than talking about food is eating."</p>
+                            <footer class="blockquote-footer">John Walters</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <blockquote class="blockquote">
+                            <p class="mb-0"><i class="fas fa-bread-slice mr-2"></i> "Food brings people together on many different levels. It's nourishment of the soul and body; it's truly love."</p>
+                            <footer class="blockquote-footer">Giada De Laurentiis</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br></br>
+
+
+    <footers class="text-center">
+        <div class="containers">
+            <a href="{% url 'add_recipe' %}"  class="btn btn-success">
+                <i class="fas fa-plus"></i>&nbsp;Add Recipe
+            </a>
+            <a href="{% url 'food_store' %}"  class="btn btn-danger">
+                <i class="fas fa-book-open"></i>&nbsp;View Recipes
+            </a>
+            <a href="{% url 'about' %}"  class="btn btn-warning">
+                <i class="fas fa-info"></i>&nbsp;Info
+            </a>
+        </div>
+    </footers>
+
+    <!-- Music player -->
+    <audio id="background-music" src="{% static 'audio/background.mp3' %}" autoplay loop></audio>
+    <div class="footers-icons">
+        <a href="#" onclick="togglePlayPause()">
+            <i id="play-pause-icon" class="fas fa-pause"></i>
+        </a>
+    </div>
+
+    <script>
+    var audio = document.getElementById('background-music');
+    var playPauseIcon = document.getElementById('play-pause-icon');
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playPauseIcon.classList.remove('fa-play');
+            playPauseIcon.classList.add('fa-pause');
+        } else {
+            audio.pause();
+            playPauseIcon.classList.remove('fa-pause');
+            playPauseIcon.classList.add('fa-play');
+        }
+    }
+    </script>
+      </div>
+</body>
+</html>

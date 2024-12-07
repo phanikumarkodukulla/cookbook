@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Store | Cook - Book</title>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85); /* Glass-like background color */
+        }
+        .back {
+            margin-top: 10px;
+            margin-left: 10px;
+            background: navy;
+            color: whitesmoke;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .back a {
+            color: whitesmoke;
+            text-decoration: none;
+        }
+        navbar {
+            background-color: rgba(255, 255, 255, 0.85); /* Glass-like background color */
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: black; /* White text color for links */
+        }
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #ffffff; /* White text color on hover */
+        }
+        .navbar-light .navbar-toggler {
+            border-color: #ffffff; /* White border color for toggler */
+        }
+        .navbar-light .navbar-toggler-icon {
+            background-color: #ffffff; /* White background color for toggler icon */
+            color: black;
+        }
+        body {
+            background-image: url("{% static 'images/bg2.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .input-group .form-control {
+            border-radius: 30px 0 0 30px;
+        }
+        .input-group .input-group-append .btn {
+            border-radius: 0 30px 30px 0;
+        }
+        .card {
+            position: relative;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .card-img-top {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .card-body {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .bookmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color:red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 2rem;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0), navy, rgba(0, 0, 0, 0));
+            margin: 10px 0;
+        }
+        h5 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+        }
+        p {
+            color: navy;
+        }
+        .logo-center {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+        .logoStart {
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+        }
+        .navLogo {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.jpg' %}" class="navLogo">&nbsp; Cook - Book
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a>
+                </li>
+                <li class="nav-item">                 <a class="nav-link" href="{% url 'add_recipe' %}"><i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Recipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'food_store' %}"><i class="fas fa-store"></i>&nbsp;&nbsp;&nbsp; Food Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info"></i> &nbsp;&nbsp;&nbsp;About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</br></br>
+    <button class = "back"><a href="{% url 'index' %}"><i class="fas fa-arrow-left"></i>Back</a></button></br></br>
+    <div class="container mt-5">
+        <form method="GET" action="{% url 'food_store' %}" class="form-inline mb-4">
+            <div class="input-group">
+                <input class="form-control" type="search" placeholder="Search for recipes..." aria-label="Search" name="q" value="{{ request.GET.q }}">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">
+                       Search
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            {% for recipe in recipes %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="bookmark">{{ forloop.counter }}</div>
+                    <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.name }}" style="height: 350px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-utensils"></i> {{ recipe.name }}</h5>
+                        <hr>
+                        <p class="card-text"><i class="fas fa-list"></i> <strong>Requirements:</strong> {{ recipe.requirements }}</p>
+                        <hr>
+                        <p class="card-text"><i class="fas fa-tasks"></i> <strong>Procedure:</strong> {{ recipe.procedure }}</p>
+                        <hr>
+                        <button onclick="location.href='{% url 'like_recipe' recipe.id %}'" class="btn btn-outline-primary btn-sm like-btn">
+                            <i class="fas fa-thumbs-up"></i> Like ({{ recipe.likes }})
+                        </button>
+                    </div>
+                </div>
+                <div class="logo-center my-4">
+                    <img src="{% static 'images/logo.jpg' %}" class="logoStart" alt="Logo">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

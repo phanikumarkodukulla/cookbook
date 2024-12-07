@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us | Cook - Book</title>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+    body {
+        background: url("{% static 'images/aboutusbg.gif' %}");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        display: none; /* Hide body initially */
+    }
+    .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    }
+    .splash-logo {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+    }
+    .profile-image {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        display: block;
+        margin: 20px auto;
+    }
+    .logoStart {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        display: block;
+        margin: 20px auto;
+        position: relative;
+        animation: moveInFromLeft 2s forwards;
+    }
+    @keyframes moveInFromLeft {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    .arrow {
+        width: 100px;
+        height: 2px;
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: -110px;
+        animation: shootArrow 2s 0.5s forwards;
+    }
+    @keyframes shootArrow {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+        100% {
+            width: 100px;
+            opacity: 1;
+        }
+    }
+    .profile-heading {
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .profile-text {
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+        margin: 20px auto;
+        max-width: 600px;
+    }
+    .notification {
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 56px; /* Below the navbar */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1050; /* Ensure it's above other content */
+    }
+    .notification .close-btn {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .back {
+        margin-top: 10px;
+        margin-left: 10px;
+        background: navy;
+        color: whitesmoke;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .back a {
+        color: whitesmoke;
+        text-decoration: none;
+    }
+    h1, p {
+        color: black;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    hr {
+        border: 0;
+        height: 1px;
+        background: black;
+        margin: 40px 0;
+    }
+    .p_info {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px;
+    }
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.85); /* Glass-like background color */
+    }
+    .navbar-light .navbar-nav .nav-link {
+        color: black; /* Black text color for links */
+    }
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #ffffff; /* White text color on hover */
+    }
+    .navbar-light .navbar-toggler {
+        border-color: #ffffff; /* White border color for toggler */
+    }
+    .navbar-light .navbar-toggler-icon {
+        background-color: #ffffff; /* White background color for toggler icon */
+        color: black;
+    }
+    .navLogo {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+    </style>
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        <img src="{% static 'images/logo.jpg' %}" class="splash-logo" alt="Logo">
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.jpg' %}" class="navLogo">&nbsp; Cook - Book
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_recipe' %}"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Recipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'food_store' %}"><i class="fas fa-store"></i>&nbsp;&nbsp;&nbsp;Food Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp;About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="notification" class="notification" style="display: none;">
+        <span><strong>Welcome to Cook-Book</strong> developer and info page</span>
+        <span class="close-btn">&times;</span>
+    </div>
+
+    <button class="back"><a href="{% url 'index' %}"><i class="fas fa-arrow-left"></i> Back</a></button>
+
+    <div class="logo-container">
+        <div class="arrow"></div>
+        <img src="{% static 'images/myprofile.jpg' %}" class="logoStart" alt="Logo">
+    </div>
+
+    <div class="p_info">
+        <h1 class="profile-heading">K. Phani Kumar Sharma</h1>
+        
+        <hr>
+        <p class="profile-text">
+            <i class="fas fa-user"></i> I am a student of Diploma in Computer Science and Engineering and a passionate web developer with a strong interest in creating user-friendly and visually appealing websites. I have experience in high-level courses such as HTML, CSS, JavaScript, Python, and Java, focusing on full-stack web development and many frameworks for advanced web development and designing beautiful web architecture . I am always eager to learn new technologies and tools to enhance my skills.
+        </p></br><hr>
+        <h5 align = "center">View my one more project </h5><hr></br>
+        <b><a href = "https://phanikumar-sharma.github.io/Chakra-Educations/index.html" target = "_blank">Chakra Educational Achadamy -- For more knowledge</a></b>
+    </div>
+    <hr>
+    <div class="logo-container">
+        <div class="arrow"></div>
+        <img src="{% static 'images/logo.jpg' %}" class="logoStart" alt="Logo">
+    </div>
+    <div class="p_info">
+        <p class="profile-text">
+            <i class="fas fa-utensils"></i> Passionate about culinary arts, I am dedicated to sharing the joy of cooking with the world through Cook-Book, a user-friendly platform where users can upload and share their recipes, receive likes, and explore others' recipes. It also allows users to search for recipes and find restaurants and hotels nearby. Welcome to the Cook-Book developer and information page, where you'll find details about our development journey and the story behind Cook-Book.
+        </p>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Show the splash screen for 5 seconds
+        setTimeout(function() {
+            document.getElementById("splashScreen").style.display = "none";
+            document.body.style.display = "block";
+            // Show the notification
+            var notification = document.getElementById("notification");
+            notification.style.display = "flex";
+
+            // Hide the notification after 7 seconds
+            setTimeout(function() {
+                notification.style.display = "none";
+            }, 7000);
+
+            // Close button functionality
+            document.querySelector(".close-btn").addEventListener("click", function() {
+                notification.style.display = "none";
+            });
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
+    </script>
+</body>
+</html>

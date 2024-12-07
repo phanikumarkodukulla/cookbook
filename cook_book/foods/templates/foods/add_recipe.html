@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Recipe | Cook - Book</title>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        body {
+            background-image: url("{% static 'images/bg3.jpg' %}");
+            background-size: auto;
+            background-repeat: repeat;
+        }
+        label {
+            background-color: white;
+            color: red;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .gradient-h1 {
+            background: linear-gradient(to right, white 0%, black 50%, white 100%);
+            color: white;
+            font-family: 'Royal', serif;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .logoStart {
+            border-radius: 50%;
+            height: 170px;
+            width: 170px;
+            display: block;
+            margin: 20px auto;
+            border-color: red;
+            border-style: solid;
+        }
+        .beautiful-heading {
+            background: linear-gradient(to right, red, white);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 36px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control,
+        .form-control-file {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .btn-primary {
+            background-color: red;
+            border-color: red;
+        }
+        .btn-primary:hover {
+            background-color: darkred;
+            border-color: darkred;
+        }
+        .icon-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .icon-wrapper i {
+            margin-right: 10px;
+        }
+        .notification {
+            background-color: lightgreen;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1050;
+        }
+        .notification img {
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
+        .notification .close-btn {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .back {
+            margin-top: 10px;
+            margin-left: 10px;
+            background: navy;
+            color: whitesmoke;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .back a {
+            color: whitesmoke;
+            text-decoration: none;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: black;
+        }
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+        .navbar-light .navbar-toggler {
+            border-color: #ffffff;
+        }
+        .navbar-light .navbar-toggler-icon {
+            background-color: #ffffff;
+            color: black;
+        }
+        .navLogo {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.jpg' %}" class="navLogo">&nbsp; Cook - Book
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_recipe' %}"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Recipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'food_store' %}"><i class="fas fa-store"></i>&nbsp;&nbsp;&nbsp;Food Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp;About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <br><br>
+    <button class="back"><a href="{% url 'index' %}"><i class="fas fa-arrow-left"></i>Back</a></button>
+    <br><br>
+    <div id="notification" class="notification" style="display: none;">
+        <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+        <span><strong>Cook - Book</strong><br>Add a new recipe with detailed procedure</span>
+        <span class="close-btn">&times;</span>
+    </div>
+
+    <img src="{% static 'images/logo.jpg' %}" class="logoStart" alt="Logo">
+
+    <div class="container mt-5">
+        <h1 class="beautiful-heading"><i class="fas fa-utensil-spoon"></i> Add a Recipe</h1>
+
+        <form method="post" enctype="multipart/form-data" class="mt-4 mx-auto">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="icon-wrapper">
+                    <i class="fas fa-receipt"></i>
+                    <label for="id_name">Recipe Name</label>
+                </div>
+                <input type="text" name="name" id="id_name" class="form-control" placeholder="Enter recipe name">
+            </div>
+            <div class="form-group">
+                <div class="icon-wrapper">
+                    <i class="fas fa-list"></i>
+                    <label for="id_requirements">Requirements</label>
+                </div>
+                <textarea name="requirements" id="id_requirements" class="form-control" placeholder="Enter requirements"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="icon-wrapper">
+                    <i class="fas fa-tasks"></i>
+                    <label for="id_procedure">Procedure</label>
+                </div>
+                <textarea name="procedure" id="id_procedure" class="form-control" placeholder="Enter procedure"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="icon-wrapper">
+                    <i class="fas fa-image"></i>
+                    <label for="id_image">Recipe Image</label>
+                </div>
+                <input type="file" name="image" id="id_image" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-plus"></i> Add Recipe</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var notification = document.getElementById("notification");
+            notification.style.display = "flex";
+
+            setTimeout(function() {
+                notification.style.display = "none";
+            }, 20000);
+
+            document.querySelector(".close-btn").addEventListener("click", function() {
+                notification.style.display = "none";
+            });
+        });
+    </script>
+</body>
+</html>

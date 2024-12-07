@@ -1,0 +1,368 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Explore | Cook - Book</title>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: black;
+            font-family: 'Arial', sans-serif;
+            color:white;
+            font-style:saint-serif;
+        }
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border-style: solid;
+            border-color: red;
+        }
+        .section {
+            text-align: center;
+            margin: 30px 0;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .food-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .food-list li {
+            display: inline-block;
+            margin: 10px;
+        }
+        .food-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .food-list img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .food-container:hover img {
+            transform: scale(1.2);
+        }
+        .section-name {
+            background-color: linear-gradient(to center, white, darkwhite, white);
+            color:white;
+            padding: 10px;
+        }
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            text-align: center;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85); /* Glass-like background color */
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: black; /* White text color for links */
+        }
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #ffffff; /* White text color on hover */
+        }
+        .navbar-light .navbar-toggler {
+            border-color: #ffffff; /* White border color for toggler */
+        }
+        .navbar-light .navbar-toggler-icon {
+            background-color: #ffffff; /* White background color for toggler icon */
+            color: black;
+        }
+        .navLogo {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.jpg' %}" class="navLogo">&nbsp; Cook - Book
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_recipe' %}"><i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Recipe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'food_store' %}"><i class="fas fa-store"></i>&nbsp;&nbsp;&nbsp; Food Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info"></i> &nbsp;&nbsp;&nbsp;About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav></br>
+    <div class="logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="img-fluid">
+    </div>
+
+    <div class="notification" id="notification">
+        <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="img-fluid" style="width: 50px; height: 50px;">
+        <span>Cook - Book | Explore food items</span>
+    </div>
+
+    <div class="section">
+        <h2 class="section-name">Tiffins</h2>
+        <ul class="food-list">
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/qnBkwCQ/idli.jpg" alt="idli">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/6DqTcs6/puri.jpg" alt="puri">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/TbKvJJ0/all.jpg" alt="all">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/k3fp4yK/kudumu.jpg" alt="kudumu">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/yQswzGq/chapathi.jpg" alt="chapathi">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/mFD0GyF/upma.jpg" alt="upma">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-name">Lunch</h2>
+        <ul class="food-list">
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/mNL6rtw/vegetable-fried-rice-5-500x375.jpg" alt="vegetable-fried-rice-5-500x375">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/HHtvq55/biryani-story-647-050517011732.jpg" alt="biryani-story-647-050517011732">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/h2rsngd/desktop-wallpaper-white-rice-rice-bowl-1.jpg" alt="desktop-wallpaper-white-rice-rice-bowl-1">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/3Yrw1Kc/chinese-egg-fried-rice-1418.jpg" alt="chinese-egg-fried-rice-1418">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/pjVNmJJ/pngtree-fried-rice-food-new-home-chef-image-2553192.jpg" alt="pngtree-fried-rice-food-new-home-chef-image-2553192">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/kypS9mh/cbd51dac10521b233b2fa751d134b108.jpg" alt="cbd51dac10521b233b2fa751d134b108">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/TmnyZg6/d69e2bb9bc6eb427c7eb30b7e5a6fee5.jpg" alt="d69e2bb9bc6eb427c7eb30b7e5a6fee5">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/C0pQ1Nk/drumstick-curry-es-salsa-verduras-deliciosa-picante-o-receta-seca-que-prepara-palitos-moringa-especi.jpg" alt="drumstick-curry-es-salsa-verduras-deliciosa-picante-o-receta-seca-que-prepara-palitos-moringa-especi">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/vjn53d8/curry-n-fry-goregaon-east-mumbai-restaurants-b2w9zc441p.jpg" alt="curry-n-fry-goregaon-east-mumbai-restaurants-b2w9zc441p">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/whcC03v/48088161991-8af0435841-o-e1577653458737.jpg" alt="48088161991-8af0435841-o-e1577653458737">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/L53DpJZ/gutti-vankaya-curry.jpg" alt="gutti-vankaya-curry">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/PYB80c8/gutti-dondakaya-370x220.jpg" alt="gutti-dondakaya-370x220">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/j84fkj3/air-fryer-mixed-vegetables.jpg" alt="air-fryer-mixed-vegetables">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/vLm3xKM/Restaurant-Style-Mixed-Veg-Gravy-1.jpg" alt="Restaurant-Style-Mixed-Veg-Gravy-1">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/wNVwGJp/Mix-Veg-Recipe-Step-By-Step-Instructions.jpg" alt="Mix-Veg-Recipe-Step-By-Step-Instructions">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/ssGsVdP/vegetable-curry-recipe.jpg" alt="vegetable-curry-recipe">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-name">Snacks</h2>
+        <ul class="food-list">
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/gTkq2HL/2-2-2-3foodgroups-fruits-detailfeature.jpg" alt="2-2-2-3foodgroups-fruits-detailfeature">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/BjBs8tR/samosa-recipe.jpg" alt="samosa-recipe">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/56HWjgm/veg-manchurian-dry-recipe-step-by-step-instructions-10.jpg" alt="veg-manchurian-dry-recipe-step-by-step-instructions-10">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/MSVKg8P/spicy-noodles-recipe.jpg" alt="spicy-noodles-recipe">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/DGgrX4B/maxresdefault.jpg" alt="maxresdefault">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/5RhFQb3/kai-murukku-recipe-diwali-snack-shutterstock-111520868.jpg" alt="kai-murukku-recipe-diwali-snack-shutterstock-111520868">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/BKh2psp/murukku-625-650x350-41467191871.jpg" alt="murukku-625-650x350-41467191871">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/h80ysTk/bowl-potato-chips.webp" alt="bowl-potato-chips">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/VpSzPR7/i-Stock-1334115358.jpg" alt="i-Stock-1334115358">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/wQK3xcB/Fruit-salad-recipe-3.jpg" alt="Fruit-salad-recipe-3">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/HNjwFqK/garden-salad-recipe-2-500x500.jpg" alt="garden-salad-recipe-2-500x500">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/Rv4X4c5/shot-of-coffee-beans-and-a-cup-of-black-coffee-on-a-wooden-table.jpg" alt="shot-of-coffee-beans-and-a-cup-of-black-coffee-on-a-wooden-table">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/x3sY6Y3/white-cup-with-tea-in-hand-on-background-of-green-tea-plantation-and-picture-id1212664938-1.jpg" alt="white-cup-with-tea-in-hand-on-background-of-green-tea-plantation-and-picture-id1212664938-1">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-name">Dinner</h2>
+        <ul class="food-list">
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/jbTmx1n/din5.jpg" alt="din5">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/Rpjv7gV/din4.jpg" alt="din4">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/2tQryqD/din3.jpg" alt="din3">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/m5yyMRQ/din2.jpg" alt="din2">
+                </div>
+            </li>
+            <li>
+                <div class="food-container">
+                    <img src="https://i.ibb.co/jg4tPs8/din1.jpg" alt="din1">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#notification').fadeIn(500).delay(3000).fadeOut(500);
+        });
+    </script>
+</body>
+</html>
