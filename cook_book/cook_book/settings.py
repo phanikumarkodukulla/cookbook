@@ -23,10 +23,12 @@ PORT = os.getenv('PORT', '8000')
 SECRET_KEY = 'django-insecure-l1zu*l4sgk$=g^yhulk3m(#bkadg@uq81o9dn^1f7f-bq4@hgv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['cook-book-h3qs.onrender.com', '0.0.0.0', '127.0.0.1']
-
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('cook-book-h3qs.onrender.com')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
